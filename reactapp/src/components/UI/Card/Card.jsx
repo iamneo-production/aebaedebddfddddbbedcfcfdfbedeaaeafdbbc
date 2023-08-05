@@ -1,41 +1,48 @@
-import '../../../index.css';
-import Button from '../Button/Button'
-import React from 'react';
+import React, { useState } from "react";
+import Button from "../Button/Button";
 
-class Card extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isDisable:false
-        }
-    }
-    correctAnswerMarkUpdate=(e,value)=> {
-            if(this.props.answer===value)
-            {
-                this.props.onAnsChg()
-            }
-            this.setState({isDisable:true})
-            this.props.onQuesChg()
-        }
-    render() {
-        return (
+const Card = (props) => {
+  const ans = props.answer;
+  const [disabled, setDisabled] = useState(false);
 
-            <div className="card">
-                <div className="main">
-                    <h4 className='question'>{this.props.question}</h4>
-                </div>
-                <div className="main">
-                    <div className="options">
-                        <Button className="btn" onClick={e=>this.correctAnswerMarkUpdate(e,this.props.options.option1)} disabled={this.state.isDisable} >{this.props.options.option1}</Button>
-                        <Button className="btn" onClick={e=>this.correctAnswerMarkUpdate(e,this.props.options.option2)} disabled={this.state.isDisable}>{this.props.options.option2}</Button>
-                        <Button className="btn" onClick={e=>this.correctAnswerMarkUpdate(e,this.props.options.option3)} disabled={this.state.isDisable}>{this.props.options.option3}</Button>
-                        <Button className="btn" onClick={e=>this.correctAnswerMarkUpdate(e,this.props.options.option4)} disabled={this.state.isDisable}>{this.props.options.option4}</Button>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-}
+  const check = (a) => {
+    setDisabled(true);
+    if (a === ans) {
+      props.attempt(true);
+    }
+  };
 
-export default Card;
+  return (
+    <div className="card">
+      <h4>{props.question}</h4>
+      <div className="buttons">
+        <Button
+          disabled={disabled}
+          onClick={() => check(props.options.option1)}
+        >
+          {props.options.option1}
+        </Button>
+        <Button
+          disabled={disabled}
+          onClick={() => check(props.options.option2)}
+        >
+          {props.options.option2}
+        </Button>
+        <Button
+          disabled={disabled}
+          onClick={() => check(props.options.option3)}
+        >
+          {props.options.option3}
+        </Button>
+        <Button
+          disabled={disabled}
+          onClick={() => check(props.options.option4)}
+        >
+          {props.options.option4}
+        </Button>
+      </div>
+    </div>
+  );
+};
 
+export default Card;
