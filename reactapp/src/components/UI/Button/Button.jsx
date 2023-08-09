@@ -1,12 +1,19 @@
-import '../../../index.css';
-import React from 'react';
+import classes from './button.module.css'
 
 
-const Button = (props)=>{
-    
-    return(
-            <button id={props.id} className={props.className} onClick={props.onClick} disabled={props.disabled} hidden={props.hidden} >{props.children}</button>
-        
-    )
+
+const Button =(props)=>{
+
+    function executeHandler (){
+        const value = props.value === "Start Quiz" ? 1 : 2
+        props.toggleItemValue(value)
+    }
+
+    return(
+        <button className={classes.btn}
+         onClick={executeHandler}>{props.value}</button>
+    )
 }
-export default Button;
+
+
+export default Button
