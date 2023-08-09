@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Button2 from '../Button/Button2'
+import Button2 from '..Button/Button2'
 import classes from './card.module.css'
 
 
